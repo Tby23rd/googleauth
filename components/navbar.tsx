@@ -19,9 +19,9 @@ function NavbarContent() {
     };
 
     return (
-        <nav className="flex justify-between items-center m-4 p-4 shadow rounded-xl">
+        <nav className="flex justify-between items-center p-2 mb-2 shadow rounded-xl">
             {/* Logo */}
-            <div className="flex items-center">
+            <div className="md:flex items-center">
                 <span className="text-xl font-bold">My App</span>
             </div>
 
@@ -40,7 +40,7 @@ function NavbarContent() {
                 {/* Session Info */}
                 <div> {/* Adjust space-x-2 as needed */}
                     {session ? (
-                        <div className="flex space-x-2 items-center">
+                        <div className="md:flex space-x-2 items-center">
                             <Image width={20} height={20} className='rounded-full'
                                 //@ts-ignore 
                                 src={session.user?.image} alt="name" />

@@ -1,36 +1,38 @@
-import { useEffect } from 'react';
-import { useSession, SessionProvider } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+"use client"
+import {useEffect} from 'react';
+import {useSession,SessionProvider} from 'next-auth/react';
+import {useRouter} from 'next/router';
+import Navbar from '@/components/navbar';
+import '@/app/globals.css';
 
 export default function Welcome() {
- return (
-    <SessionProvider session={null}>
-      <WelcomeContent />
-    </SessionProvider>
- );
+   return (
+      <SessionProvider>
+         <WelcomeContent />
+      </SessionProvider>
+   );
 }
 
 function WelcomeContent() {
- const { data: session } = useSession();
- const router = useRouter();
+   const {data: session,status}=useSession();
+   const router=useRouter();
 
- useEffect(() => {
-  console.log(session); // Add this line to debug
-  if (!session) {
-     router.push('/dummy');
-  }
- }, [session, router]);
+   useEffect(() => {
+      if(status==='loading') return; // Don't redirect while session is loading
+      if(!session) {
+         router.push('/dummy');
+      }
+   },[session,status,router]);
 
- return (
-    <div>
-      <h1>Welcome, {session?.user?.name}!</h1>
-      {session?.user?.image && (
-        <Image
-        width={50} height={50}
-         src={session.user.image} alt='name' />
-      )}
-      {/* Your welcome page content */}
-    </div>
- );
+   return (
+      <div>
+         {status==='loading'&&<p>Loading...</p>}
+         {status==='authenticated'&&(
+            <div>
+               <Navbar/>
+               <h1>Welcome, {session?.user?.name}!</h1>
+            </div>
+         )}
+      </div>
+   );
 }
