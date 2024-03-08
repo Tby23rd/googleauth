@@ -1,10 +1,9 @@
 "use client"
-import {useSession,SessionProvider,signOut} from 'next-auth/react';
+import { useSession, SessionProvider, signOut, signIn } from 'next-auth/react';
 import Link from 'next/link';
-import {signIn} from 'next-auth/react';
 import Image from 'next/image';
 
-const Navbar=() => {
+const Navbar = () => {
     return (
         <SessionProvider session={null}>
             <NavbarContent />
@@ -13,9 +12,9 @@ const Navbar=() => {
 };
 
 function NavbarContent() {
-    const {data: session}=useSession();
+    const { data: session } = useSession();
 
-    const handleSignOut=() => {
+    const handleSignOut = () => {
         signOut(); // Call the signOut function to sign the user out
     };
 
@@ -39,9 +38,8 @@ function NavbarContent() {
                 </Link>
 
                 {/* Session Info */}
-                {/* Session Info */}
                 <div> {/* Adjust space-x-2 as needed */}
-                    {session? (
+                    {session ? (
                         <div className="flex space-x-2 items-center">
                             <Image width={20} height={20} className='rounded-full'
                                 //@ts-ignore 
@@ -49,7 +47,7 @@ function NavbarContent() {
                             <span>{session.user?.name}</span>
                             <button className='bg-blue-500 rounded-full text-white font-bold py-2 px-6' onClick={handleSignOut}>Sign out</button>
                         </div>
-                    ):(
+                    ) : (
                         <button className='bg-blue-500 rounded-full text-white font-bold py-2 px-6' onClick={() => signIn()}>Sign In</button>
                     )}
                 </div>
