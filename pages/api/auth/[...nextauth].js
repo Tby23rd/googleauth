@@ -8,11 +8,17 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET, // Optional secret for JWT signing
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user }) {
-      // Add custom logic, e.g., create a user in your database
-      return user;
+    async signIn({ user, account, profile }) {
+      return true;
+    },
+    async redirect({ url, baseUrl }) {
+      // Redirect to the welcome page after sign-in
+      if (url === '/api/auth/callback/google') {
+        return '/welcome';
+      }
+      return baseUrl;
     },
   },
 });

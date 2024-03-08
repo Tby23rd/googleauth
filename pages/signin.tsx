@@ -1,7 +1,7 @@
-// pages/signin.tsx
 import { signIn, SessionProvider, useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import  '@/app/globals.css';
 
 export default function SignIn() {
   return (
@@ -13,20 +13,27 @@ export default function SignIn() {
 
 function SignInContent() {
   const { data: session } = useSession();
+  const [showSignInMessage, setShowSignInMessage] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    // Redirect to home page if user is already signed in
-    if (session) router.push('/');
+    // Redirect to welcome page if user is already signed in
+    if (session) {
+      setShowSignInMessage(true);
+      setTimeout(() => {
+        router.push('/welcome');
+      }, 2000); // Redirect after 2 seconds
+    }
   }, [session, router]);
 
   return (
     <div>
-      <h1>Sign in</h1>
       {/* Render sign-in button only if user is not already signed in */}
       {!session && (
-        <button onClick={() => signIn('google')}>Sign in with Google</button>
+        <button className='bg-blue-500 m-4 p-2 text-white rounded-full' onClick={() => signIn('google')}>Sign in with Google</button>
       )}
+      {/* Display sign-in message */}
+      {showSignInMessage && <p>Thanks for signing in!</p>}
     </div>
   );
 }
