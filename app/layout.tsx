@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dadako software",
-  description: "Software by women for women",
+  title: "Digitote",
+  description: "Digital tote bag",
 };
 
 export default function RootLayout({
@@ -17,9 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
         <Navbar />
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer/>
       </body>
     </html>
   );
