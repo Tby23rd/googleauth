@@ -2,7 +2,6 @@
 import {useEffect} from 'react';
 import {useSession,SessionProvider} from 'next-auth/react';
 import {useRouter} from 'next/router';
-import Navbar from '@/components/navbar';
 import '@/app/globals.css';
 
 export default function TalentPage() {
@@ -29,7 +28,6 @@ function TalentPageContent() {
          {status==='loading'&&<p>Loading...</p>}
          {status==='authenticated'&&(
             <div>
-               <Navbar/>
                <h1>Welcome, {session?.user?.name}!</h1>
             </div>
          )}

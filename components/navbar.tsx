@@ -3,7 +3,7 @@ import {useSession,SessionProvider,signOut,signIn} from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from 'react';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 
 const Navbar=() => {
     return (
@@ -16,7 +16,6 @@ const Navbar=() => {
 function NavbarContent() {
     const {data: session}=useSession();
     const [isNavVisible,setIsNavVisible]=useState(false);
-    const router=useRouter();
 
     const handleSignOut=() => {
         signOut(); // Call the signOut function to sign the user out
@@ -43,32 +42,32 @@ function NavbarContent() {
                 </button>
             </div>
 
-            <div className={`flex flex-col md:flex-row font-semibold items-center space-x-4 ${isNavVisible ? 'block' : 'hidden'} md:flex`}>
-            {/* Home Link */}
-            <Link href="/dashboardpage">
-                <span className={`hover:text-blue-900 ${router.pathname === '/dashboardpage' ? 'bg-blue-900 border rounded-full p-2 text-white' : ''}`}>My Dashboard</span>
-            </Link>
+            <div className={`flex flex-col md:flex-row font-semibold items-center space-x-4 ${isNavVisible? 'block':'hidden'} md:flex`}>
+                {/* Home Link */}
+                <Link href="/dashboardpage">
+                    My Dashboard
+                </Link>
 
-            {/* Project Page Link */}
-            <Link href="/projectpage">
-                <span className={`hover:bg-blue-900 hover:text-white ${router.pathname === '/projectpage' ? 'bg-blue-900 border rounded-full p-2 text-white' : ''}`}>Projects</span>
-            </Link>
+                {/* Project Page Link */}
+                <Link href="/projectpage">
+                    Projects
+                </Link>
 
-            {/* Companies Page Link */}
-            <Link href="/companypage">
-                <span className={`hover:text-blue-900 ${router.pathname === '/companypage' ? 'bg-blue-900 border rounded-full p-2 text-white' : ''}`}>Companies</span>
-            </Link>
+                {/* Companies Page Link */}
+                <Link href="/companypage">
+                    Company
+                </Link>
 
-            {/* Talents Page Link */}
-            <Link href="/talentpage">
-                <span className={`hover:text-blue-900 ${router.pathname === '/talentpage' ? 'bg-blue-900 border rounded-full p-2 text-white' : ''}`}>Talents</span>
-            </Link>
+                {/* Talents Page Link */}
+                <Link href="/talentpage">
+                    Talent
+                </Link>
 
-            {/* Accounting Page Link */}
-            <Link href="/accountingpage">
-                <span className={`hover:text-blue-900 ${router.pathname === '/accountingpage' ? 'bg-blue-900 border rounded-full p-2 text-white' : ''}`}>Accounting</span>
-            </Link>
-        </div>
+                {/* Accounting Page Link */}
+                <Link href="/accountingpage">
+                    Accounting
+                </Link>
+            </div>
 
             {/* Session Info */}
             <div className="flex items-center space-x-4">
