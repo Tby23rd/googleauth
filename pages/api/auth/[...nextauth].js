@@ -14,9 +14,9 @@ export default NextAuth({
       return true;
     },
     async redirect({ url, baseUrl }) {
-      // Redirect to the welcome page after sign-in
+      // Redirect to the dashboardpage page after sign-in
       if (url === '/api/auth/callback/google') {
-        return '/welcome';
+        return '/dashboardpage';
       }
       return baseUrl;
     },
