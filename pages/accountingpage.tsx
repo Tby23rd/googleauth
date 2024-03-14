@@ -5,15 +5,15 @@ import {useRouter} from 'next/router';
 import Navbar from '@/components/navbar';
 import '@/app/globals.css';
 
-export default function Welcome() {
+export default function AccountingPage() {
    return (
       <SessionProvider>
-         <WelcomeContent />
+         <AccountingPageContent />
       </SessionProvider>
    );
 }
 
-function WelcomeContent() {
+function AccountingPageContent() {
    const {data: session,status}=useSession();
    const router=useRouter();
 
